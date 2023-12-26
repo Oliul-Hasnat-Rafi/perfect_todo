@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/src/Home.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  var Note = await Hive.openBox('Note');
+
   runApp(const MyApp());
 }
 

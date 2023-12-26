@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/src/addtask.dart';
 
 class Alltask extends StatefulWidget {
@@ -20,6 +21,24 @@ class _AlltaskState extends State<Alltask> {
       ),
       body: Container(
         color: Color(0xFFD6D7EF),
+        child: Column(
+          children: [
+            Expanded(
+              child: ValueListenableBuilder(
+                valueListenable: Hive.box('Note').listenable(),
+                builder: (BuildContext context, box, Widget) {
+                  return ListView.builder(
+                      itemCount: box.keys.toList().length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(box.getAt(index)),
+                        );
+                      });
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
