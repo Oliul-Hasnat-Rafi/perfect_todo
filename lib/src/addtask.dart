@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/main.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
+import 'package:perfect_todo/src/Alltask.dart';
 
 class Addtask extends StatefulWidget {
   const Addtask({super.key});
@@ -76,6 +77,8 @@ class _AddtaskState extends State<Addtask> {
                 Note!.add(newnote);
                 titleController.clear();
                 desController.clear();
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (c) => Alltask()));
               },
               child: Container(
                 width: 386,

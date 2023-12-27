@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/main.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
+import 'package:perfect_todo/src/Alltask.dart';
 
 class Updatenote extends StatefulWidget {
   String title, subtitle;
@@ -87,13 +88,16 @@ class _AddtaskState extends State<Updatenote> {
                 // Note!.put(
                 //     DateTime.now().toString(),
 
-                // titleController.clear();
-                // desController.clear();
                 Note!.putAt(
                     widget.indexnum,
                     Notemodel(
                         title: updatetitleController.text.toString(),
                         subtitle: updatedesController.text.toString()));
+
+                updatetitleController.clear();
+                updatedesController.clear();
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (c) => Alltask()));
               },
               child: Container(
                 width: 386,
