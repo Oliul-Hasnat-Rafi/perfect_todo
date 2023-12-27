@@ -96,8 +96,7 @@ class _AddtaskState extends State<Updatenote> {
 
                 updatetitleController.clear();
                 updatedesController.clear();
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (c) => Alltask()));
+                Navigator.pop(context);
               },
               child: Container(
                 width: 386,
