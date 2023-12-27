@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/main.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
+import 'package:perfect_todo/src/Updatenote.dart';
 import 'package:perfect_todo/src/addtask.dart';
 
 class Alltask extends StatefulWidget {
@@ -69,7 +70,7 @@ class _AlltaskState extends State<Alltask> {
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
-                                        'ff',
+                                        result!.title!,
                                         style: const TextStyle(
                                           color: Color(0xFF9395D3),
                                           fontSize: 13,
@@ -85,7 +86,7 @@ class _AlltaskState extends State<Alltask> {
                                       child: SizedBox(
                                           width: 124,
                                           child: Text(
-                                            'dd',
+                                            result.subtitle!,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 10,
@@ -98,13 +99,25 @@ class _AlltaskState extends State<Alltask> {
                                   ],
                                 ),
                               ),
-                              const Icon(
-                                Icons.edit,
-                                color: Color(0xFF9395D3),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (c) => Updatenote(
+                                                indexnum: index,
+                                                title: result.title!,
+                                                subtitle: result.subtitle!,
+                                              )));
+                                },
+                                child: const Icon(
+                                  Icons.edit,
+                                  color: Color(0xFF9395D3),
+                                ),
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Note!.deleteAll(box.keys);
+                                  Note!.delete(result);
                                   setState(() {});
                                 },
                                 child: const Icon(

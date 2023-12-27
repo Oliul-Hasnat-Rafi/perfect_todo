@@ -3,16 +3,30 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/main.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
 
-class Addtask extends StatefulWidget {
-  const Addtask({super.key});
+class Updatenote extends StatefulWidget {
+  String title, subtitle;
+  int indexnum;
+  Updatenote(
+      {super.key,
+      required this.indexnum,
+      required this.title,
+      required this.subtitle});
 
   @override
-  State<Addtask> createState() => _AddtaskState();
+  State<Updatenote> createState() => _AddtaskState();
 }
 
-class _AddtaskState extends State<Addtask> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController desController = TextEditingController();
+class _AddtaskState extends State<Updatenote> {
+  TextEditingController updatetitleController = TextEditingController();
+  TextEditingController updatedesController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    updatetitleController.text = widget.title.toString();
+
+    updatedesController.text = widget.subtitle.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +34,7 @@ class _AddtaskState extends State<Addtask> {
       appBar: AppBar(
         backgroundColor: Color(0xFF9395D3),
         title: Text(
-          'Add Task',
+          'UPDATE TASK',
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
@@ -36,7 +50,7 @@ class _AddtaskState extends State<Addtask> {
             Padding(
               padding: EdgeInsets.all(20.0),
               child: TextField(
-                  controller: titleController,
+                  controller: updatetitleController,
                   style: TextStyle(fontSize: 20, color: Colors.black),
                   decoration: InputDecoration(
                     hintText: 'Title',
@@ -52,7 +66,7 @@ class _AddtaskState extends State<Addtask> {
               padding: const EdgeInsets.all(20.0),
               child: TextField(
                   maxLines: 5,
-                  controller: desController,
+                  controller: updatedesController,
                   style: TextStyle(fontSize: 20, color: Colors.black),
                   decoration: InputDecoration(
                     hintText: 'Sub Title',
@@ -69,20 +83,24 @@ class _AddtaskState extends State<Addtask> {
                 // Note!.add(
                 //   titleController.text.toString(),
                 // );
-                Notemodel newnote = Notemodel(
-                    title: titleController.text.toString(),
-                    subtitle: desController.text.toString());
 
-                Note!.add(newnote);
-                titleController.clear();
-                desController.clear();
+                // Note!.put(
+                //     DateTime.now().toString(),
+
+                // titleController.clear();
+                // desController.clear();
+                Note!.putAt(
+                    widget.indexnum,
+                    Notemodel(
+                        title: updatetitleController.text.toString(),
+                        subtitle: updatedesController.text.toString()));
               },
               child: Container(
                 width: 386,
                 height: 65.07,
                 child: Center(
                   child: Text(
-                    'ADD',
+                    'UPDATE',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,

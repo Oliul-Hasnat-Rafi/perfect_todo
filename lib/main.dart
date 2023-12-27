@@ -5,7 +5,6 @@ import 'package:perfect_todo/src/Home.dart';
 
 Box? Note;
 void main() async {
-  await Hive.initFlutter();
   // var Note = await Hive.openBox('Note');
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
