@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:perfect_todo/model/Notemodel.dart';
 
 class Addtask extends StatefulWidget {
   const Addtask({super.key});
@@ -71,8 +72,17 @@ class _AddtaskState extends State<Addtask> {
             ),
             GestureDetector(
               onTap: () {
-                Note!.add(titleController.text.toString());
+                // Note!.add(
+                //   titleController.text.toString(),
+                // );
+
+                Note!.put(
+                    DateTime.now().toString(),
+                    Notemodel(
+                        title: titleController.text.toString(),
+                        subtitle: desController.text.toString()));
                 titleController.clear();
+                desController.clear();
               },
               child: Container(
                 width: 386,

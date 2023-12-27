@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:perfect_todo/model/Notemodel.dart';
 import 'package:perfect_todo/src/Home.dart';
 
+Box? Note;
 void main() async {
   await Hive.initFlutter();
-  var Note = await Hive.openBox('Note');
-
+  // var Note = await Hive.openBox('Note');
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Note = await Hive.openBox<Notemodel>("Note");
+  Hive.registerAdapter(NotemodelAdapter());
   runApp(const MyApp());
 }
 
