@@ -10,6 +10,10 @@ class Complect extends StatefulWidget {
 class _ComplectState extends State<Complect> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(
+        color: const Color(0xFFD6D7EF),
+      ),
+    );
   }
 }
