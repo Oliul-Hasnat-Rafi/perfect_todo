@@ -8,7 +8,7 @@ part of 'Oncomplect.dart';
 
 class OncomplectAdapter extends TypeAdapter<Oncomplect> {
   @override
-  final int typeId = 1;
+  final int typeId = 12;
 
   @override
   Oncomplect read(BinaryReader reader) {
@@ -17,9 +17,9 @@ class OncomplectAdapter extends TypeAdapter<Oncomplect> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Oncomplect(
-      comid: fields[0] as int?,
-      comtitle: fields[1] as String?,
-      comsubtitle: fields[2] as String?,
+      comid: fields[10] as int?,
+      comtitle: fields[11] as String?,
+      comsubtitle: fields[12] as String?,
     );
   }
 
@@ -27,11 +27,11 @@ class OncomplectAdapter extends TypeAdapter<Oncomplect> {
   void write(BinaryWriter writer, Oncomplect obj) {
     writer
       ..writeByte(3)
-      ..writeByte(0)
+      ..writeByte(10)
       ..write(obj.comid)
-      ..writeByte(1)
+      ..writeByte(11)
       ..write(obj.comtitle)
-      ..writeByte(2)
+      ..writeByte(12)
       ..write(obj.comsubtitle);
   }
 

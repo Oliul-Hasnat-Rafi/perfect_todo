@@ -95,7 +95,8 @@ class _AlltaskState extends State<Alltask> {
                           child: PieChart(
                             dataMap: {
                               'Paining task': Note!.values.length.toDouble(),
-                              'Complect task': 25,
+                              'Complect task':
+                                  comtask!.values.length.toDouble(),
                             },
                             legendOptions: LegendOptions(
                                 legendPosition: LegendPosition.left),
@@ -220,6 +221,8 @@ class _AlltaskState extends State<Alltask> {
                                             comtitle: result.title,
                                             comsubtitle: result.subtitle);
                                         comtask!.add(taskcom);
+                                        Note!.delete(box.keyAt(index));
+                                        setState(() {});
                                       },
                                       child: const Padding(
                                         padding: EdgeInsets.only(right: 10),
