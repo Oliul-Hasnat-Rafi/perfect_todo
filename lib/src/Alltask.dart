@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:perfect_todo/complectmodel/Oncomplect.dart';
 import 'package:perfect_todo/main.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
 import 'package:perfect_todo/src/Updatenote.dart';
@@ -12,8 +13,6 @@ class Alltask extends StatefulWidget {
   @override
   State<Alltask> createState() => _AlltaskState();
 }
-
-Box<Notemodel>? box;
 
 class _AlltaskState extends State<Alltask> {
   // @override
@@ -215,11 +214,19 @@ class _AlltaskState extends State<Alltask> {
                                         color: Color(0xFF9395D3),
                                       ),
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.only(right: 10),
-                                      child: Icon(
-                                        Icons.task_alt_rounded,
-                                        color: Color(0xFF9395D3),
+                                    GestureDetector(
+                                      onTap: () {
+                                        var taskcom = Oncomplect(
+                                            comtitle: result.title,
+                                            comsubtitle: result.subtitle);
+                                        comtask!.add(taskcom);
+                                      },
+                                      child: const Padding(
+                                        padding: EdgeInsets.only(right: 10),
+                                        child: Icon(
+                                          Icons.task_alt_rounded,
+                                          color: Color(0xFF9395D3),
+                                        ),
                                       ),
                                     )
                                   ]));
