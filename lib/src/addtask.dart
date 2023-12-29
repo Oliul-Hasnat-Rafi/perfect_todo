@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:perfect_todo/main.dart';
+import 'package:get/get.dart';
+import 'package:perfect_todo/controller/addtaskcontroller.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
-import 'package:perfect_todo/src/Alltask.dart';
 
-class Addtask extends StatefulWidget {
-  const Addtask({super.key});
+class Addtask extends StatelessWidget {
+  Addtask({super.key});
 
-  @override
-  State<Addtask> createState() => _AddtaskState();
-}
-
-class _AddtaskState extends State<Addtask> {
   TextEditingController titleController = TextEditingController();
+
   TextEditingController desController = TextEditingController();
+
+  final AddController addtaskcontroller = Get.put(AddController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF9395D3),
-        title: Text(
+        title: const Text(
           'Add Task',
           style: TextStyle(
             color: Colors.white,
@@ -67,23 +64,20 @@ class _AddtaskState extends State<Addtask> {
             ),
             GestureDetector(
               onTap: () {
-                // Note!.add(
-                //   titleController.text.toString(),
-                // );
                 Notemodel newnote = Notemodel(
                     title: titleController.text.toString(),
                     subtitle: desController.text.toString());
+                addtaskcontroller.addtask(newnote);
 
-                Note!.add(newnote);
                 titleController.clear();
                 desController.clear();
-                Navigator.pop(context);
+                Get.back();
               },
               child: Container(
                 width: 386,
                 height: 65.07,
                 child: Center(
-                  child: Text(
+                  child: const Text(
                     'ADD',
                     style: TextStyle(
                       color: Colors.white,
@@ -99,7 +93,7 @@ class _AddtaskState extends State<Addtask> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  shadows: [
+                  shadows: const [
                     BoxShadow(
                       color: Color(0x3F000000),
                       blurRadius: 4,

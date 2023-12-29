@@ -1,4 +1,6 @@
+import 'package:awesome_icons/awesome_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:perfect_todo/src/Alltask.dart';
 import 'package:perfect_todo/src/complect.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -28,6 +30,22 @@ class _HomeState extends State<Home> {
             ),
           ),
           backgroundColor: Color(0xFF9395D3),
+          // actions: [
+          //   IconButton(
+          //       onPressed: () {
+          //         setState(() {
+          //           Get.changeTheme(ThemeData.light());
+          //         });
+          //       },
+          //       icon: Icon(FontAwesomeIcons.sun)),
+          //   IconButton(
+          //       onPressed: () {
+          //         setState(() {
+          //           Get.changeTheme(ThemeData.dark());
+          //         });
+          //       },
+          //       icon: Icon(FontAwesomeIcons.moon))
+          // ],
         ),
         bottomNavigationBar: SalomonBottomBar(
           currentIndex: _currentIndex,

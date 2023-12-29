@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/complectmodel/Oncomplect.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return const GetMaterialApp(
       home: Home(),
       debugShowCheckedModeBanner: false,
     );

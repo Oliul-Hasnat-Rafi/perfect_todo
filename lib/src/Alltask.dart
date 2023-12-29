@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/complectmodel/Oncomplect.dart';
+import 'package:perfect_todo/controller/addtaskcontroller.dart';
 import 'package:perfect_todo/main.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
 import 'package:perfect_todo/src/Updatenote.dart';
@@ -31,13 +33,8 @@ class _AlltaskState extends State<Alltask> {
     Colors.green,
     Colors.red,
   ];
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setState(() {});
-  }
 
+  final AddController addtaskcontroller = Get.put(AddController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,15 +187,11 @@ class _AlltaskState extends State<Alltask> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (c) => Updatenote(
-                                                      indexnum: index,
-                                                      title: result.title!,
-                                                      subtitle:
-                                                          result.subtitle!,
-                                                    )));
+                                        Get.to(Updatenote(
+                                          indexnum: index,
+                                          title: result.title!,
+                                          subtitle: result.subtitle!,
+                                        ));
                                       },
                                       child: const Icon(
                                         Icons.edit,
@@ -207,8 +200,8 @@ class _AlltaskState extends State<Alltask> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        Note!.delete(box.keyAt(index));
-                                        setState(() {});
+                                        addtaskcontroller
+                                            .delecttask(box.keyAt(index));
                                       },
                                       child: const Icon(
                                         Icons.delete,
@@ -220,9 +213,10 @@ class _AlltaskState extends State<Alltask> {
                                         var taskcom = Oncomplect(
                                             comtitle: result.title,
                                             comsubtitle: result.subtitle);
-                                        comtask!.add(taskcom);
-                                        Note!.delete(box.keyAt(index));
-                                        setState(() {});
+                                        addtaskcontroller.complecttask(taskcom);
+
+                                        addtaskcontroller
+                                            .delecttask(box.keyAt(index));
                                       },
                                       child: const Padding(
                                         padding: EdgeInsets.only(right: 10),
@@ -231,7 +225,7 @@ class _AlltaskState extends State<Alltask> {
                                           color: Color(0xFF9395D3),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ]));
                         });
                   },
