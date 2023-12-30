@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/complectmodel/Oncomplect.dart';
 
-class Complect extends StatefulWidget {
+class Complect extends StatelessWidget {
   const Complect({super.key});
 
-  @override
-  State<Complect> createState() => _ComplectState();
-}
-
-class _ComplectState extends State<Complect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,30 +3,14 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:perfect_todo/complectmodel/Oncomplect.dart';
 import 'package:perfect_todo/controller/addtaskcontroller.dart';
-import 'package:perfect_todo/main.dart';
+import 'package:perfect_todo/controller/piecontroller.dart';
 import 'package:perfect_todo/model/Notemodel.dart';
 import 'package:perfect_todo/src/Updatenote.dart';
 import 'package:perfect_todo/src/addtask.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-class Alltask extends StatefulWidget {
-  const Alltask({super.key});
-
-  @override
-  State<Alltask> createState() => _AlltaskState();
-}
-
-class _AlltaskState extends State<Alltask> {
-  // @override
-  // late final AnimationController _controller =
-  //     AnimationController(duration: Duration(seconds: 5), vsync: this)
-  //       ..repeat();
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _controller.dispose();
-  // }
+class Alltask extends StatelessWidget {
+  Alltask({super.key});
 
   final Colorlist = <Color>[
     Colors.blue,
@@ -35,6 +19,9 @@ class _AlltaskState extends State<Alltask> {
   ];
 
   final AddController addtaskcontroller = Get.put(AddController());
+
+  final PieController pie = Get.put(PieController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,12 +57,12 @@ class _AlltaskState extends State<Alltask> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Expanded(
                           flex: 2,
                           child: Text(
                             'TASK OVERVIEW',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 25,
                               fontFamily: 'Jost',
@@ -91,9 +78,8 @@ class _AlltaskState extends State<Alltask> {
                           padding: const EdgeInsets.all(8.0),
                           child: PieChart(
                             dataMap: {
-                              'Paining task': Note!.values.length.toDouble(),
-                              'Complect task':
-                                  comtask!.values.length.toDouble(),
+                              'pending task': pie.pendingTask(),
+                              'Complect task': pie.completeTask(),
                             },
                             legendOptions: LegendOptions(
                                 legendPosition: LegendPosition.left),
@@ -111,7 +97,7 @@ class _AlltaskState extends State<Alltask> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ]),
               ),
               Expanded(
@@ -201,7 +187,7 @@ class _AlltaskState extends State<Alltask> {
                                     GestureDetector(
                                       onTap: () {
                                         addtaskcontroller
-                                            .delecttask(box.keyAt(index));
+                                            .delecttask(box.getAt(index));
                                       },
                                       child: const Icon(
                                         Icons.delete,
