@@ -8,3 +8,9 @@
   <img src="https://i.postimg.cc/7Y3k0P9R/image3.png" width="250" height = "500">
   <img src="https://i.postimg.cc/DzMknSfS/image4.png" width="250" height = "500">
 </p>
+<h2>💻packages used</h2>
+
+*   salomon bottom bar
+*   Get
+*   pie chart
+*   Hive
